@@ -1,0 +1,15 @@
+.department-container {
+  padding: 24px;
+}
+
+.department-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.department-header h2 {
+  margin: 0;
+  font-size: 24px;
+}

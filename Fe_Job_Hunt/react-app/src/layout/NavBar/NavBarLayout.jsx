@@ -42,7 +42,7 @@ function NavBarLayout() {
     setIsLoggedIn(false);
     setUserInfo(null);
     message.success('Đăng xuất thành công!');
-    navigate(appPath.home);
+    navigate(appPath.login);
   };
 
   const universityDocumentsMenu = (
@@ -120,7 +120,6 @@ function NavBarLayout() {
             </Button>
           </Dropdown>
         ) : (
-          // For guests: show login button
           <Space className="login-section">
             <Button type="primary" onClick={() => navigate(appPath.login)}>
               Đăng nhập

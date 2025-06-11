@@ -1,0 +1,87 @@
+.home-banner {
+  background: linear-gradient(to right, #1890ff, #52c41a);
+  padding: 64px 50px;
+  text-align: center;
+  color: white;
+}
+
+.home-banner h1 {
+  color: white;
+  margin-bottom: 16px;
+}
+
+.feature-card {
+  height: 100%;
+  transition: all 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+  padding: 24px 0;
+  text-align: center;
+  background: #f0f2f5;
+}
+
+/* Departments section */
+.departments-container {
+  margin: 30px 0;
+}
+
+.departments-desktop {
+  display: block;
+}
+
+.departments-mobile {
+  display: none;
+}
+
+.departments-carousel {
+  padding: 0 20px;
+}
+
+.departments-carousel .slick-arrow {
+  color: #1890ff;
+  font-size: 24px;
+  z-index: 2;
+}
+
+.departments-carousel .slick-prev {
+  left: -15px;
+}
+
+.departments-carousel .slick-next {
+  right: -15px;
+}
+
+.departments-carousel .slick-dots li button {
+  background: #1890ff;
+}
+
+.department-card {
+  margin: 8px;
+  transition: all 0.3s;
+}
+
+.department-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Media query for mobile */
+@media (max-width: 768px) {
+  .departments-desktop {
+    display: none;
+  }
+  
+  .departments-mobile {
+    display: block;
+  }
+  
+  .home-banner {
+    padding: 40px 20px;
+  }
+}

@@ -21,7 +21,7 @@ const DashboardLayout = () => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const storedUserInfo = localStorage.getItem('user_info');
     if (storedUserInfo) {
@@ -58,9 +58,9 @@ const DashboardLayout = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sider 
-        collapsible 
-        collapsed={collapsed} 
+      <Sider
+        collapsible
+        collapsed={collapsed}
         onCollapse={setCollapsed}
         className="dashboard-sider"
       >
@@ -85,18 +85,22 @@ const DashboardLayout = () => {
           <Menu.Item key="/admin/documents" icon={<BookOutlined />}>
             <Link to="/admin/documents">Quản lý tài liệu</Link>
           </Menu.Item>
-          
+
           {/* Only show user management for superadmin */}
           {isSuperAdmin && (
-            <Menu.Item key="/admin/users" icon={<TeamOutlined />}>
-              <Link to="/admin/users">Quản lý người dùng</Link>
-            </Menu.Item>
+            <>
+              <Menu.Item key="/admin/departments" icon={<TeamOutlined />}>
+                <Link to="/admin/departments">Quản lý phòng ban</Link>
+              </Menu.Item>
+              <Menu.Item key="/admin/subjects" icon={<BookOutlined />}>
+                <Link to="/admin/subjects">Quản lý môn học</Link>
+              </Menu.Item>
+            </>
           )}
-          
           <Menu.Item key="/admin/settings" icon={<SettingOutlined />}>
             <Link to="/admin/settings">Cài đặt hệ thống</Link>
           </Menu.Item>
-          
+
           <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout}>
             Đăng xuất
           </Menu.Item>
@@ -107,7 +111,7 @@ const DashboardLayout = () => {
           <div className="dashboard-user-info">
             <Avatar size="small" icon={<UserOutlined />} />
             <Text style={{ color: '#333', marginLeft: '8px' }}>
-              {userInfo?.firstName || userInfo?.userName} 
+              {userInfo?.firstName || userInfo?.userName}
               <span className="user-role">
                 {isSuperAdmin ? '(Super Admin)' : '(Admin)'}
               </span>

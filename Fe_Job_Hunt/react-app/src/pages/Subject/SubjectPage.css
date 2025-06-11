@@ -1,0 +1,32 @@
+.subject-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s;
+}
+
+.subject-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
+
+.subject-card .ant-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.subject-card .ant-card-meta {
+  margin-bottom: 12px;
+}
+
+.subject-card .ant-card-meta-title {
+  color: #1890ff;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.subject-card .ant-typography {
+  color: #595959;
+  font-size: 14px;
+}

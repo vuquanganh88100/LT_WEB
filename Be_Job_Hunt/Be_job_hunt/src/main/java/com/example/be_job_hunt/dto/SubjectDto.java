@@ -14,4 +14,5 @@ public class SubjectDto {
     private String description;
     private String title;
     private int departmentId;
+    private String departmentName;
 }

@@ -14,4 +14,13 @@ public class SubjectMapper {
         subjectEntity.setDescription(dto.getDescription());
         return  subjectEntity;
     }
+    public SubjectDto toDto(SubjectEntity entity){
+        SubjectDto subjectDto=new SubjectDto();
+        subjectDto.setCode(entity.getCode());
+        subjectDto.setTitle(entity.getTitle());
+        subjectDto.setCredit(entity.getCredit());
+        subjectDto.setDescription(entity.getDescription());
+        subjectDto.setDepartmentId(entity.getDepartment().getDepartment_id());
+        return  subjectDto;
+    }
 }

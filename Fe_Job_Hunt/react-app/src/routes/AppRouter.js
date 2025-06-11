@@ -7,13 +7,16 @@ import RegisterPage from '../pages/Auth/RegisterPage';
 import HomePage from '../pages/Home/HomePage';
 import DashboardPage from '../pages/Admin/Dashboard/DashboardPage';
 import UsersPage from '../pages/Admin/Users/UsersPage';
+import DepartmentAdmin from '../pages/Admin/Department/DepartmentAdmin';
+import SubjectAdmin from '../pages/Admin/Subject/SubjectAdmin';
+import SubjectPage from '../pages/Subject/SubjectPage';
 import { appPath } from '../config/appPath';
 
 const AppRoutes = () => {
     return (
         <Routes>
             <Route path="/" element={<Navigate to={appPath.home} replace />} />
-            
+
             {/* Auth Routes */}
             <Route path={appPath.login} element={
                 <AuthLayout>
@@ -28,7 +31,7 @@ const AppRoutes = () => {
 
             {/* Home Page - Accessible to both guests and logged-in users */}
             <Route path={appPath.home} element={<HomePage />} />
-            
+
             {/* Knowledge Page - Will be implemented later */}
             <Route path="/knowledge" element={
                 <div style={{ padding: '20px', marginTop: '64px' }}>
@@ -36,7 +39,7 @@ const AppRoutes = () => {
                     <p>Trang kiến thức và blog sẽ được phát triển sau.</p>
                 </div>
             } />
-            
+
             {/* Faculty document pages - placeholder routes */}
             <Route path="/documents/:faculty" element={
                 <div style={{ padding: '20px', marginTop: '64px' }}>
@@ -44,6 +47,9 @@ const AppRoutes = () => {
                     <p>Trang tài liệu khoa sẽ được phát triển sau.</p>
                 </div>
             } />
+
+            {/* Subject page - displays subjects by department */}
+            <Route path="/subjects/:departmentId" element={<SubjectPage />} />
 
             {/* User Dashboard */}
             <Route path={appPath.userDashboard} element={
@@ -58,6 +64,7 @@ const AppRoutes = () => {
                 <Route index element={<Navigate to="/admin/dashboard" replace />} />
                 <Route path="dashboard" element={<DashboardPage />} />
                 <Route path="users" element={<UsersPage />} />
+                <Route path="departments" element={<DepartmentAdmin />} />
                 <Route path="posts" element={
                     <div>
                         <h2>Quản lý bài viết</h2>
@@ -76,6 +83,8 @@ const AppRoutes = () => {
                         <p>Trang cài đặt hệ thống sẽ được phát triển sau.</p>
                     </div>
                 } />
+                <Route path="subjects" element={<SubjectAdmin />} />
+
             </Route>
 
             {/* Redirect adminDashboard to new structure */}
