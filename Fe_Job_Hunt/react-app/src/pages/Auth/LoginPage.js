@@ -27,20 +27,16 @@ const LoginPage = () => {
 
                 message.success('Đăng nhập thành công!');
 
-                // Get the role - it's the first element of the role array
                 const roleValue = response.userDto.role[0];
                 console.log("User role:", roleValue);
 
-                // Single switch statement with number values
                 switch (roleValue) {
-                    case 2:
-                        navigate(appPath.adminDashboard);
+                    case 2: // Admin
+                    case 1: // Superadmin
+                        navigate(appPath.adminDashboard); // Both admin and superadmin share the same dashboard
                         break;
-                    case 1:
-                        navigate(appPath.superAdminDashboard);
-                        break;
-                    case 3:
-                        navigate(appPath.userDashboard);
+                    case 3: // Regular user
+                        navigate(appPath.home); // Regular users go to home page
                         break;
                     default:
                         navigate(appPath.home);
