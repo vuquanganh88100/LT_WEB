@@ -3,9 +3,10 @@ import { Table, Button, Space, Input, Modal, Form, message, Select, InputNumber 
 import { PlusOutlined, EditOutlined, DeleteOutlined, SearchOutlined } from '@ant-design/icons';
 import './SubjectAdmin.css';
 import { getAllDepartment } from '../../../services/DepartmentService';
-import { getAllSubject, getSubjectByDepartment} from '../../../services/SubjectService';
+import { getAllSubject, getSubjectByDepartment, addSubject, updateSubject } from '../../../services/SubjectService';
 import ConfirmationModal from '../../../components/ConfirmationModal';
 import useConfirmationModal from '../../../hooks/useConfirmationModal';
+import useNotify from '../../../hooks/useNotify';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -19,9 +20,10 @@ const SubjectAdmin = () => {
   const [currentSubject, setCurrentSubject] = useState(null);
   const [form] = Form.useForm();
   const [userInfo, setUserInfo] = useState(null);
-  
-  // Use our custom hook for confirmation modal
+
+  // Use our custom hooks for confirmation modal and notifications
   const { modalState, showModal, hideModal } = useConfirmationModal();
+  const notify = useNotify();
 
   useEffect(() => {
     const storedUserInfo = localStorage.getItem('user_info');
@@ -38,7 +40,7 @@ const SubjectAdmin = () => {
     if (userInfo === null) return;
     const isAdmin = userInfo?.role?.includes(1) || userInfo?.role?.includes(2);
     if (!isAdmin) {
-      message.error('Bạn không có quyền truy cập trang này');
+      notify.error('Bạn không có quyền truy cập trang này');
       return;
     }
 
@@ -56,7 +58,18 @@ const SubjectAdmin = () => {
       },
       (error) => {
         console.error('Lỗi khi fetch department:', error);
-        message.error('Không thể tải danh sách phòng ban');
+
+        // Get error message safely
+        let errorMessage = 'Không thể tải danh sách phòng ban';
+        if (error && error.response && error.response.data) {
+          if (typeof error.response.data === 'string') {
+            errorMessage = error.response.data;
+          } else if (error.response.data.message) {
+            errorMessage = error.response.data.message;
+          }
+        }
+
+        notify.error(errorMessage);
         setLoading(false);
       }
     );
@@ -72,7 +85,18 @@ const SubjectAdmin = () => {
       },
       (error) => {
         console.error('Lỗi khi fetch subject:', error);
-        message.error('Không thể tải danh sách môn học');
+
+        // Get error message safely
+        let errorMessage = 'Không thể tải danh sách môn học';
+        if (error && error.response && error.response.data) {
+          if (typeof error.response.data === 'string') {
+            errorMessage = error.response.data;
+          } else if (error.response.data.message) {
+            errorMessage = error.response.data.message;
+          }
+        }
+
+        notify.error(errorMessage);
         setLoading(false);
       }
     );
@@ -93,7 +117,6 @@ const SubjectAdmin = () => {
     }
     setIsModalVisible(true);
   };
-
   const handleModalOk = () => {
     form.validateFields()
       .then(values => {
@@ -102,28 +125,65 @@ const SubjectAdmin = () => {
           title: values.name, // Convert name field to title for API
         };
         delete formattedValues.name; // Remove name field
-        
+
         if (currentSubject) {
-          // Edit existing subject - this would typically call an API
-          // For now, we'll just update the local state
-          const updatedSubjects = subjects.map(subject => 
-            subject.subjectId === currentSubject.subjectId ? 
-            { ...subject, ...formattedValues } : subject
+          updateSubject(
+            currentSubject.subjectId,
+            formattedValues,
+            (data) => {
+              // On success
+              const updatedSubjects = subjects.map(subject =>
+                subject.subjectId === currentSubject.subjectId ?
+                  { ...subject, ...formattedValues } : subject
+              );
+              setSubjects(updatedSubjects);
+              notify.success('Cập nhật môn học thành công');
+              setIsModalVisible(false);
+            },
+            (error) => {
+              // On error - with safe error handling
+              console.error('Failed to update subject:', error);
+
+              // Get error message safely
+              let errorMessage = 'Không thể cập nhật môn học';
+              if (error && error.response && error.response.data) {
+                if (typeof error.response.data === 'string') {
+                  errorMessage = error.response.data;
+                } else if (error.response.data.message) {
+                  errorMessage = error.response.data.message;
+                }
+              }
+
+              notify.error(errorMessage);
+            }
           );
-          setSubjects(updatedSubjects);
-          message.success('Cập nhật môn học thành công');
         } else {
-          // Add new subject - this would typically call an API
-          // For now, we'll just update the local state
-          const newSubject = {
-            subjectId: Date.now(), // Generate a temporary ID
-            ...formattedValues,
-            createdAt: new Date().toISOString().split('T')[0]
-          };
-          setSubjects([...subjects, newSubject]);
-          message.success('Thêm môn học thành công');
+          // Add new subject using API
+          addSubject(
+            formattedValues,
+            (data) => {
+              notify.success('Thêm môn học thành công');
+              setIsModalVisible(false);
+              loadSubjects(); // GỌI API ĐỂ LOAD LẠI DỮ LIỆU
+            },
+            (error) => {
+              // On error - with safe error handling
+              console.error('Failed to add subject:', error);
+
+              // Get error message safely
+              let errorMessage = 'Không thể thêm môn học';
+              if (error && error.response && error.response.data) {
+                if (typeof error.response.data === 'string') {
+                  errorMessage = error.response.data;
+                } else if (error.response.data.message) {
+                  errorMessage = error.response.data.message;
+                }
+              }
+
+              notify.error(errorMessage);
+            }
+          );
         }
-        setIsModalVisible(false);
       })
       .catch(info => console.log('Validate Failed:', info));
   };
@@ -138,7 +198,7 @@ const SubjectAdmin = () => {
         // Here you would typically call an API to delete the subject
         const updatedSubjects = subjects.filter(subject => subject.subjectId !== subjectId);
         setSubjects(updatedSubjects);
-        message.success('Xóa môn học thành công');
+        notify.success('Xóa môn học thành công');
       }
     });
   };
@@ -216,7 +276,7 @@ const SubjectAdmin = () => {
         dataSource={filteredSubjects}
         rowKey="subjectId"
         loading={loading}
-        
+
       />
 
       <Modal

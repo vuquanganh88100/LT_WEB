@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubjectDto {
-    private int id;
+    private long subjectId;
     private String code ;
     private int credit;
     private String description;

@@ -12,4 +12,9 @@ import java.util.List;
 public interface SubjectRepository extends JpaRepository<SubjectEntity,Integer> {
     @Query("SELECT s FROM SubjectEntity s WHERE s.department.department_id = :deptId")
     List<SubjectEntity> findByDepartmentId(@Param("deptId") int departmentId);
+    
+    @Query("SELECT s FROM SubjectEntity s WHERE s.code = :code AND s.department.department_id = :departmentId AND s.id != :id")
+    List<SubjectEntity> findByCodeAndDepartmentIdExcludingId(@Param("code") String code,
+                                                             @Param("departmentId") int departmentId,
+                                                             @Param("id") int id);
 }

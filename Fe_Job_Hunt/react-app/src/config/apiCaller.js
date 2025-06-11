@@ -79,6 +79,8 @@ export const postRequest = async (
     return res.data;
   } catch (error) {
     handleError(error, errorCallback);
+    // Return null instead of rethrowing the error
+    return null;
   }
 };
 
@@ -96,7 +98,8 @@ export const getRequest = async (
     return res.data;
   } catch (error) {
     handleError(error, errorCallback);
-    throw error;
+    // Don't rethrow the error
+    return null;
   }
 };
 
@@ -114,7 +117,8 @@ export const putRequest = async (
     return res.data;
   } catch (error) {
     handleError(error, errorCallback);
-    throw error;
+    // Don't rethrow the error so it doesn't cause an uncaught exception
+    return null;
   }
 };
 
@@ -131,6 +135,7 @@ export const deleteRequest = async (
     return res.data;
   } catch (error) {
     handleError(error, errorCallback);
-    throw error;
+    // Don't rethrow the error
+    return null;
   }
 };

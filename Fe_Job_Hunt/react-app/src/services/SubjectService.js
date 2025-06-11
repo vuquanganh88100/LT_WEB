@@ -1,4 +1,4 @@
-import { getRequest } from "../config/apiCaller";
+import { getRequest, postRequest, putRequest } from "../config/apiCaller";
 import { apiPath } from "../config/apiPath"
 
 export const getSubjectByDepartment = async (
@@ -21,6 +21,33 @@ export const getAllSubject = async (
     await getRequest(
         apiPath.getSubjectByDepartment,
         {},
+        successCallback,
+        errorCallback
+    );
+};
+
+export const addSubject = async (
+    params = {},
+    successCallback,
+    errorCallback
+) => {
+    await postRequest(
+        apiPath.addSubject,
+        params,
+        successCallback,
+        errorCallback
+    );
+};
+
+export const updateSubject = async (
+    subjectId,
+    params = {},
+    successCallback,
+    errorCallback
+) => {
+    await putRequest(
+        `${apiPath.updateSubject}/${subjectId}`,
+        params,
         successCallback,
         errorCallback
     );

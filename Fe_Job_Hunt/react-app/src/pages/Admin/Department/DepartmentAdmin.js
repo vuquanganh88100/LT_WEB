@@ -15,9 +15,10 @@ import {
   SearchOutlined
 } from '@ant-design/icons';
 import './DepartmentAdmin.css';
-import { getAllDepartment } from '../../../services/DepartmentService';
+import { getAllDepartment, updateDepartment, addDepartment } from '../../../services/DepartmentService';
 import ConfirmationModal from '../../../components/ConfirmationModal';
 import useConfirmationModal from '../../../hooks/useConfirmationModal';
+import useNotify from '../../../hooks/useNotify';
 
 const DepartmentAdmin = () => {
   const [departments, setDepartments] = useState([]);
@@ -27,7 +28,7 @@ const DepartmentAdmin = () => {
   const [currentDepartment, setCurrentDepartment] = useState(null);
   const [form] = Form.useForm();
   const [userInfo, setUserInfo] = useState(null);
-  
+  const notify=useNotify()
   // Use our custom hook for confirmation modal
   const { modalState, showModal, hideModal } = useConfirmationModal();
 
@@ -49,7 +50,7 @@ const DepartmentAdmin = () => {
 
     const isAdmin = userInfo?.role?.includes(1) || userInfo?.role?.includes(2);
     if (!isAdmin) {
-      message.error('Bạn không có quyền truy cập trang này');
+      notify.error('Bạn không có quyền truy cập trang này');
       return;
     }
 
@@ -66,7 +67,17 @@ const DepartmentAdmin = () => {
       },
       (error) => {
         console.error('Lỗi khi fetch department:', error);
-        message.error('Không thể tải danh sách phòng ban');
+        
+        let errorMessage = 'Không thể tải danh sách phòng ban';
+        if (error && error.response && error.response.data) {
+          if (typeof error.response.data === 'string') {
+            errorMessage = error.response.data;
+          } else if (error.response.data.message) {
+            errorMessage = error.response.data.message;
+          }
+        }
+        
+        notify.error(errorMessage);
         setLoading(false);
       }
     );
@@ -83,32 +94,75 @@ const DepartmentAdmin = () => {
     setIsModalVisible(true);
   };
 
-  // Xác nhận trong modal
   const handleModalOk = () => {
     form.validateFields().then(values => {
       if (currentDepartment) {
-        const updated = departments.map(dep =>
-          dep.departmentId === currentDepartment.departmentId ? { ...dep, ...values } : dep
+        updateDepartment(
+          currentDepartment.departmentId,
+          values, 
+          (data) => {
+            const updated = departments.map(dep =>
+              dep.departmentId === currentDepartment.departmentId ? { ...dep, ...values } : dep
+            );
+            setDepartments(updated);
+            notify.success('Cập nhật phòng ban thành công');
+            setIsModalVisible(false);
+          },
+          (error) => {
+            console.error('Failed to update department:', error);
+            
+            let errorMessage = 'Không thể cập nhật phòng ban';
+            if (error && error.response && error.response.data) {
+              if (typeof error.response.data === 'string') {
+                errorMessage = error.response.data;
+              } else if (error.response.data.message) {
+                errorMessage = error.response.data.message;
+              }
+            }
+            
+            notify.error(errorMessage);
+          }
         );
-        setDepartments(updated);
-        message.success('Cập nhật phòng ban thành công');
       } else {
-        const maxId = departments.reduce((max, dep) => Math.max(max, dep.departmentId), 0);
-        const newDepartment = {
-          departmentId: maxId + 1,
-          ...values,
-          createdAt: new Date().toISOString().split('T')[0]
-        };
-        setDepartments([...departments, newDepartment]);
-        message.success('Thêm phòng ban thành công');
+        addDepartment(
+          values, 
+          (data) => {
+            if (data && data.data) {
+              setDepartments([...departments, data.data]);
+            } else {
+              const maxId = departments.reduce((max, dep) => Math.max(max, dep.departmentId), 0);
+              const newDepartment = {
+                departmentId: maxId + 1,
+                ...values,
+                createdAt: new Date().toISOString().split('T')[0]
+              };
+              setDepartments([...departments, newDepartment]);
+            }
+            notify.success('Thêm phòng ban thành công');
+            setIsModalVisible(false);
+          },
+          (error) => {
+            console.error('Failed to add department:', error);
+            
+            // Get error message safely
+            let errorMessage = 'Không thể thêm phòng ban';
+            if (error && error.response && error.response.data) {
+              if (typeof error.response.data === 'string') {
+                errorMessage = error.response.data;
+              } else if (error.response.data.message) {
+                errorMessage = error.response.data.message;
+              }
+            }
+            
+            notify.error(errorMessage);
+          }
+        );
       }
-      setIsModalVisible(false);
     }).catch(info => {
       console.log('Validate Failed:', info);
     });
   };
 
-  // Xóa phòng ban
   const handleDeleteDepartment = (id) => {
     showModal({
       title: 'Xác nhận xóa phòng ban',
@@ -116,7 +170,6 @@ const DepartmentAdmin = () => {
       okType: 'danger',
       okText: 'Xóa',
       onConfirm: () => {
-        // Fix the property name to match your API data structure (departmentId instead of id)
         setDepartments(departments.filter(dep => dep.departmentId !== id));
         message.success('Xóa phòng ban thành công');
       }

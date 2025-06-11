@@ -7,7 +7,11 @@ export const apiPath={
 
     //department
     getDepartments:API_PATH+"/department",
+    addDepartment:API_PATH+"/department/create",
+    updateDepartment:API_PATH+"/department/update",
 
     //subject
-    getSubjectByDepartment:API_PATH+"/subject"
+    getSubjectByDepartment:API_PATH+"/subject",
+    addSubject:API_PATH+"/subject/save",
+    updateSubject:API_PATH+"/subject/update"
 }
