@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name ="subject")
 @Data
@@ -21,5 +23,8 @@ public class SubjectEntity {
     @ManyToOne
     @JoinColumn(name = "department_id")
     private DepartmentEntity department;
+
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
+    private List<DocumentEntity> documentEntities;
 
 }
