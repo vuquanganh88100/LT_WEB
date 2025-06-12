@@ -1,9 +1,11 @@
 package com.example.be_job_hunt.controller;
 
+import com.example.be_job_hunt.dto.Document.DocumentDto;
 import com.example.be_job_hunt.dto.ErrorResponse;
 import com.example.be_job_hunt.dto.SubjectDto;
 import com.example.be_job_hunt.entity.SubjectEntity;
 import com.example.be_job_hunt.exception.DuplicateException;
+import com.example.be_job_hunt.service.DocumentService;
 import com.example.be_job_hunt.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import java.util.List;
 public class SubjectController {
     @Autowired
     SubjectService subjectService;
+
     
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody SubjectDto subjectDto){
@@ -52,4 +55,5 @@ public class SubjectController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi cập nhật môn học");
         }
     }
+
 }

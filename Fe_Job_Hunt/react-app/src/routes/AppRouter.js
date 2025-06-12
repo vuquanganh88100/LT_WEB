@@ -10,6 +10,7 @@ import UsersPage from '../pages/Admin/Users/UsersPage';
 import DepartmentAdmin from '../pages/Admin/Department/DepartmentAdmin';
 import SubjectAdmin from '../pages/Admin/Subject/SubjectAdmin';
 import SubjectPage from '../pages/Subject/SubjectPage';
+import DocumentPage from '../pages/Document/Document';
 import { appPath } from '../config/appPath';
 
 const AppRoutes = () => {
@@ -50,6 +51,9 @@ const AppRoutes = () => {
 
             {/* Subject page - displays subjects by department */}
             <Route path="/subjects/:departmentId" element={<SubjectPage />} />
+            
+            {/* Document page - displays documents for a subject */}
+            <Route path="/subject/:subjectId/documents" element={<DocumentPage />} />
 
             {/* User Dashboard */}
             <Route path={appPath.userDashboard} element={

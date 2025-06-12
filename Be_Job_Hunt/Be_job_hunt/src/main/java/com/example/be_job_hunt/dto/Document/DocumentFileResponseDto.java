@@ -1,4 +1,4 @@
-package com.example.be_job_hunt.dto;
+package com.example.be_job_hunt.dto.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

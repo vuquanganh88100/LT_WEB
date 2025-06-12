@@ -1,16 +1,13 @@
 package com.example.be_job_hunt.mapper;
 
-import com.example.be_job_hunt.dto.DocumentDto;
+import com.example.be_job_hunt.dto.Document.DocumentDto;
 import com.example.be_job_hunt.entity.DocumentEntity;
 import com.example.be_job_hunt.entity.Status;
 import com.example.be_job_hunt.entity.Type;
-import com.example.be_job_hunt.repository.DepartmentRepository;
 import com.example.be_job_hunt.repository.SubjectRepository;
 import com.example.be_job_hunt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
 
 @Component
 public class DocumentMapper {

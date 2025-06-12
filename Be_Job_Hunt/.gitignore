@@ -1,2 +1,4 @@
 src/main/resources/keys/service-account.json
 Be_Job_Hunt/Be_job_hunt/edublog-*.json
+# Ensure all service account credential files are ignored
+**/edublog-*.json

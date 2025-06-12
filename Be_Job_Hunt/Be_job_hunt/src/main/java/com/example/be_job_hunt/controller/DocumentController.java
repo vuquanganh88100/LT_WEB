@@ -1,8 +1,7 @@
 package com.example.be_job_hunt.controller;
 
 import com.example.be_job_hunt.config.googleDrive.GoogleDriveApi;
-import com.example.be_job_hunt.dto.DocumentDto;
-import com.example.be_job_hunt.exception.NotFoundException;
+import com.example.be_job_hunt.dto.Document.DocumentDto;
 import com.example.be_job_hunt.service.DocumentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +29,14 @@ public class DocumentController {
         return ResponseEntity.ok(documentService.getAllDocuments());
     }
     
-    @GetMapping("/{id}")
-    public ResponseEntity<DocumentDto> getDocumentById(@PathVariable long id) {
-        try {
-            return ResponseEntity.ok(documentService.getDocumentById(id));
-        } catch (NotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    @GetMapping
+//    public ResponseEntity<DocumentDto> getDocumentBySubject(@PathVariable long id) {
+//        try {
+//            return ResponseEntity.ok(documentService.getDocumentById(id));
+//        } catch (NotFoundException e) {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
     @PostMapping( consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<DocumentDto> createDocument(
@@ -70,10 +69,11 @@ public class DocumentController {
 //        }
 //    }
 //
-//    @GetMapping("/subject/{subjectId}")
-//    public ResponseEntity<List<DocumentDto>> getDocumentsBySubjectId(@PathVariable long subjectId) {
-//        return ResponseEntity.ok(documentService.getDocumentsBySubjectId(subjectId));
-//    }
+@GetMapping("/subject")
+public ResponseEntity<List<DocumentDto>> getDocumentsBySubjectId(@RequestParam("subjectId") long subjectId) {
+    return ResponseEntity.ok(documentService.getDocumentsBySubjectId(subjectId));
+}
+
 //
 //    @GetMapping("/user/{userId}")
 //    public ResponseEntity<List<DocumentDto>> getDocumentsByUserId(@PathVariable long userId) {

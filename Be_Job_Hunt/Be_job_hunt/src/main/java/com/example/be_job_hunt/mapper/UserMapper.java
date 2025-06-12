@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 public class UserMapper {
     public UserDto toDto(UserEntity user) {
         UserDto userDto = new UserDto();
+        userDto.setUserId(user.getId());
         userDto.setGender(user.getGender());
         userDto.setEmail(user.getEmail());
         userDto.setUserName(user.getUserName());

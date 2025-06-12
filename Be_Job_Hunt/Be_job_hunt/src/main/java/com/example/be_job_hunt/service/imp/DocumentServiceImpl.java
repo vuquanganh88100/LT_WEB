@@ -1,9 +1,11 @@
 package com.example.be_job_hunt.service.imp;
 
 import com.example.be_job_hunt.config.googleDrive.GoogleDriveApi;
-import com.example.be_job_hunt.dto.DocumentDto;
-import com.example.be_job_hunt.dto.DocumentFileDto;
+import com.example.be_job_hunt.dto.Document.DocumentDto;
+import com.example.be_job_hunt.dto.Document.DocumentFileDto;
+import com.example.be_job_hunt.dto.Document.DocumentFileResponseDto;
 import com.example.be_job_hunt.entity.DocumentEntity;
+import com.example.be_job_hunt.entity.SubjectEntity;
 import com.example.be_job_hunt.exception.NotFoundException;
 import com.example.be_job_hunt.mapper.DocumentMapper;
 import com.example.be_job_hunt.repository.DocumentRepository;
@@ -20,6 +22,8 @@ import java.security.GeneralSecurityException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,7 +44,7 @@ public class DocumentServiceImpl implements DocumentService {
     private GoogleDriveApi googleDriveApi;
     @Autowired
     private DocumentFileService documentFileService;
-    
+
     @Override
     public List<DocumentDto> getAllDocuments() {
         return documentRepository.findAll()
@@ -76,7 +80,7 @@ public class DocumentServiceImpl implements DocumentService {
         }
         return documentMapper.toDto(savedEntity);
     }
-    
+
 //    @Override
 //    public DocumentDto updateDocument(long id, DocumentDto documentDto) throws NotFoundException {
 //        if (!documentRepository.existsById(id)) {
@@ -116,15 +120,31 @@ public class DocumentServiceImpl implements DocumentService {
 //        documentRepository.deleteById(id);
 //    }
 //
-//    @Override
-//    public List<DocumentDto> getDocumentsBySubjectId(long subjectId) {
-//        return subjectRepository.findById((int)subjectId)
-//                .map(subject -> documentRepository.findBySubject(subject))
-//                .orElse(List.of())
-//                .stream()
-//                .map(documentMapper::toDto)
-//                .collect(Collectors.toList());
-//    }
+@Override
+public List<DocumentDto> getDocumentsBySubjectId(long subjectId) {
+    Optional<SubjectEntity> optionalSubject = subjectRepository.findById((int) subjectId);
+
+    if (optionalSubject.isEmpty()) {
+        System.out.println("Không tìm thấy subject với ID: " + subjectId);
+        return List.of();
+    }
+
+    SubjectEntity subject = optionalSubject.get();
+    List<DocumentEntity> documents = documentRepository.findBySubjectId(subject.getId());
+
+    System.out.println("Tìm thấy " + documents.size() + " tài liệu:");
+    for (DocumentEntity doc : documents) {
+        System.out.println("Document ID: " + doc.getId() + ", Subject ID: " + doc.getSubject().getId());
+    }
+
+    List<DocumentDto> documentDtos = new ArrayList<>();
+    for (DocumentEntity doc : documents) {
+        documentDtos.add(documentMapper.toDto(doc));
+    }
+
+    return documentDtos;
+}
+
 //
 //    @Override
 //    public List<DocumentDto> getDocumentsByUserId(long userId) {

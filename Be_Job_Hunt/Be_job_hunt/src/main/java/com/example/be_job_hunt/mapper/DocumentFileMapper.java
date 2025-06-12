@@ -1,9 +1,8 @@
 package com.example.be_job_hunt.mapper;
 
 import com.example.be_job_hunt.config.googleDrive.GoogleDriveApi;
-import com.example.be_job_hunt.dto.DocumentFileDto;
-import com.example.be_job_hunt.dto.DocumentFileResponseDto;
-import com.example.be_job_hunt.entity.DocumentEntity;
+import com.example.be_job_hunt.dto.Document.DocumentFileDto;
+import com.example.be_job_hunt.dto.Document.DocumentFileResponseDto;
 import com.example.be_job_hunt.entity.DocumentFileEntity;
 import com.example.be_job_hunt.repository.DocumentRepository;
 import com.google.api.services.drive.model.File;

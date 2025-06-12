@@ -13,5 +13,9 @@ export const apiPath={
     //subject
     getSubjectByDepartment:API_PATH+"/subject",
     addSubject:API_PATH+"/subject/save",
-    updateSubject:API_PATH+"/subject/update"
+    updateSubject:API_PATH+"/subject/update",
+
+    //document
+    getDocumentBySubject:API_PATH+"/document/subject",
+    createDocument:API_PATH+"/document"
 }

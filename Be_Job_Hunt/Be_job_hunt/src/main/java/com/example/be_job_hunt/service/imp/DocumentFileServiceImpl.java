@@ -1,7 +1,6 @@
 package com.example.be_job_hunt.service.imp;
 
-import com.example.be_job_hunt.dto.DocumentFileDto;
-import com.example.be_job_hunt.dto.DocumentFileResponseDto;
+import com.example.be_job_hunt.dto.Document.DocumentFileDto;
 import com.example.be_job_hunt.entity.DocumentFileEntity;
 import com.example.be_job_hunt.mapper.DocumentFileMapper;
 import com.example.be_job_hunt.repository.DocumentFileRepository;

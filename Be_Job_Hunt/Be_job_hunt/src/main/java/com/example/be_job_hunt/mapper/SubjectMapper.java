@@ -16,6 +16,7 @@ public class SubjectMapper {
     }
     public SubjectDto toDto(SubjectEntity entity){
         SubjectDto subjectDto=new SubjectDto();
+        subjectDto.setSubjectId(entity.getId());
         subjectDto.setCode(entity.getCode());
         subjectDto.setTitle(entity.getTitle());
         subjectDto.setCredit(entity.getCredit());

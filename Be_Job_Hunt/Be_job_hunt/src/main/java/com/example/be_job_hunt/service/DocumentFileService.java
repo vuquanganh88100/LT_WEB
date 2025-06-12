@@ -1,7 +1,6 @@
 package com.example.be_job_hunt.service;
 
-import com.example.be_job_hunt.dto.DocumentFileDto;
-import com.example.be_job_hunt.dto.DocumentFileResponseDto;
+import com.example.be_job_hunt.dto.Document.DocumentFileDto;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;

@@ -1,7 +1,8 @@
 package com.example.be_job_hunt.service;
 
-import com.example.be_job_hunt.dto.DocumentDto;
-import com.example.be_job_hunt.dto.DocumentFileDto;
+import com.example.be_job_hunt.dto.Document.DocumentDto;
+import com.example.be_job_hunt.dto.Document.DocumentFileDto;
+import com.example.be_job_hunt.dto.Document.DocumentFileResponseDto;
 import com.example.be_job_hunt.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public interface DocumentService {
@@ -21,4 +23,6 @@ public interface DocumentService {
 //    List<DocumentDto> getDocumentsByUserId(long userId);
 //    List<DocumentDto> getDocumentsByType(String type);
 //    List<DocumentDto> getDocumentsByStatus(String status);
+List<DocumentDto> getDocumentsBySubjectId(long subjectId);
+
 }

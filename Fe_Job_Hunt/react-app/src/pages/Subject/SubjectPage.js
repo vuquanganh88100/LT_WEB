@@ -22,7 +22,7 @@ const SubjectPage = () => {
       getSubjectByDepartment(
         departmentId,
         (data) => {
-          console.log("Subjects fetched:", data);
+          console.error("Subjects fetched:", data);
           setSubjects(data);
           // If department name is included in the response, set it
           if (data.length > 0 && data[0].department && data[0].department.name) {
@@ -61,8 +61,8 @@ const SubjectPage = () => {
                     className="subject-card" 
                     style={{ width: '100%' }}
                     onClick={() => {
-                      // Navigate to subject detail page (to be implemented)
-                      // navigate(`/subject/${subject.id}`);
+                      // Navigate to subject documents page
+                      navigate(`/subject/${subject.subjectId}/documents`);
                     }}
                   >
                     <Card.Meta

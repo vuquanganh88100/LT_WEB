@@ -22,5 +22,8 @@ export const appPath = {
     
     // subjects
     subjects: "/subjects",
-    subjectsByDepartment: (departmentId) => `/subjects/${departmentId}`
+    subjectsByDepartment: (departmentId) => `/subjects/${departmentId}`,
+    
+    // documents
+    subjectDocuments: (subjectId) => `/subject/${subjectId}/documents`
 }
