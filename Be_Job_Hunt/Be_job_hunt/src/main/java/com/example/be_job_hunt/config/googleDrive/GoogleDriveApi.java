@@ -8,6 +8,7 @@ import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,16 +23,50 @@ import java.util.List;
 public class GoogleDriveApi {
 
     private static final String APPLICATION_NAME = "Elearning Project";
-    private static final String SERVICE_ACCOUNT_KEY_PATH = "D:\\prj_job_hunt\\Be_Job_Hunt\\Be_job_hunt\\edublog-462622-4c054ce0482d.json";
-
-    // Nếu bạn có thư mục cha cụ thể thì gán ID vào đây
+    
+    // Read from application.properties or use default
+    @Value("${google.service.account.key:edublog-credentials.json}")
+    private String serviceAccountKeyPath;
+    
     private static final String parentFolderId = "1WP5Pi4C0YlsGt7Veb7MQwCdteKOv9RqT";
 
 
 
     public Drive getDriveService() throws IOException, GeneralSecurityException {
+        // Try to load from file system
+        java.io.File credentialFile = new java.io.File(serviceAccountKeyPath);
+        
+        // If not found, try to load from classpath
+        if (!credentialFile.exists()) {
+            credentialFile = new java.io.File(System.getProperty("user.dir"), serviceAccountKeyPath);
+        }
+        
+        // If still not found, try to load from resources
+        if (!credentialFile.exists()) {
+            try {
+                java.io.InputStream inputStream = getClass().getClassLoader().getResourceAsStream(serviceAccountKeyPath);
+                if (inputStream != null) {
+                    GoogleCredential credential = GoogleCredential.fromStream(inputStream)
+                            .createScoped(Collections.singleton(DriveScopes.DRIVE));
+                    
+                    return new Drive.Builder(
+                            GoogleNetHttpTransport.newTrustedTransport(),
+                            JacksonFactory.getDefaultInstance(),
+                            credential
+                    ).setApplicationName(APPLICATION_NAME).build();
+                }
+            } catch (Exception e) {
+                // Fall through to next approach
+            }
+        }
+        
+        if (!credentialFile.exists()) {
+            throw new IOException("Credential file not found at: " + serviceAccountKeyPath + 
+                                 " or " + System.getProperty("user.dir") + "/" + serviceAccountKeyPath);
+        }
+        
         GoogleCredential credential = GoogleCredential.fromStream(
-                        new FileInputStream(SERVICE_ACCOUNT_KEY_PATH))
+                        new FileInputStream(credentialFile))
                 .createScoped(Collections.singleton(DriveScopes.DRIVE));
 
         return new Drive.Builder(

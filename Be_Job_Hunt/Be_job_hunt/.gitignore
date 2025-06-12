@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Google Cloud Credentials ###
+*.json
+!package.json
+!package-lock.json
+edublog-*.json

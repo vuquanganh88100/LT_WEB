@@ -14,13 +14,13 @@ public class DocumentFileEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "file_name", nullable = false, length = 50)
+    @Column(name = "file_name")
     private String fileName;
-    @Column(name = "url", nullable = false, length = 50)
+    @Column(name = "url")
     private String url;
-    @Column(name = "mime_type", nullable = false, length = 50)
+    @Column(name = "mime_type")
     private String mimeType;
-    @Column(name = "size", nullable = false, length = 50)
+    @Column(name = "size")
     private Long size;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "document_id")
