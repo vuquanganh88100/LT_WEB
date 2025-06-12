@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/blog/api/users")
 public class UserController {
 
-    @PostMapping("test")
-    public ResponseEntity<?>test(){
+    @PostMapping("test")    public ResponseEntity<?>test(){
         return ResponseEntity.status(HttpStatus.OK).body("test");
     }
 }
