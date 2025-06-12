@@ -12,4 +12,7 @@ import java.util.List;
 public interface DepartmentRepository extends JpaRepository<DepartmentEntity,Integer> {
     @Query("SELECT d FROM DepartmentEntity d WHERE d.name = :name AND d.department_id != :id")
     List<DepartmentEntity> findByNameExcludingId(@Param("name") String name, @Param("id") int id);
+    @Query("SELECT s.department FROM SubjectEntity s WHERE s.id = :subjectId")
+    DepartmentEntity findDepartmentBySubjectId(@Param("subjectId") Long subjectId);
+
 }

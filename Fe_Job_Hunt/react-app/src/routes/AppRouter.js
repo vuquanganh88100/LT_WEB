@@ -9,6 +9,7 @@ import DashboardPage from '../pages/Admin/Dashboard/DashboardPage';
 import UsersPage from '../pages/Admin/Users/UsersPage';
 import DepartmentAdmin from '../pages/Admin/Department/DepartmentAdmin';
 import SubjectAdmin from '../pages/Admin/Subject/SubjectAdmin';
+import DocumentAdmin from '../pages/Admin/Document/DocumentAdmin';
 import SubjectPage from '../pages/Subject/SubjectPage';
 import DocumentPage from '../pages/Document/Document';
 import { appPath } from '../config/appPath';
@@ -75,12 +76,7 @@ const AppRoutes = () => {
                         <p>Trang quản lý bài viết sẽ được phát triển sau.</p>
                     </div>
                 } />
-                <Route path="documents" element={
-                    <div>
-                        <h2>Quản lý tài liệu</h2>
-                        <p>Trang quản lý tài liệu sẽ được phát triển sau.</p>
-                    </div>
-                } />
+                <Route path="documents" element={<DocumentAdmin />} />
                 <Route path="settings" element={
                     <div>
                         <h2>Cài đặt hệ thống</h2>

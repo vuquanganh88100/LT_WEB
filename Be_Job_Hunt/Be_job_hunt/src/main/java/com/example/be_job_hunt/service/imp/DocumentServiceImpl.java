@@ -5,6 +5,7 @@ import com.example.be_job_hunt.dto.Document.DocumentDto;
 import com.example.be_job_hunt.dto.Document.DocumentFileDto;
 import com.example.be_job_hunt.dto.Document.DocumentFileResponseDto;
 import com.example.be_job_hunt.entity.DocumentEntity;
+import com.example.be_job_hunt.entity.Status;
 import com.example.be_job_hunt.entity.SubjectEntity;
 import com.example.be_job_hunt.exception.NotFoundException;
 import com.example.be_job_hunt.mapper.DocumentMapper;
@@ -14,6 +15,8 @@ import com.example.be_job_hunt.repository.UserRepository;
 import com.example.be_job_hunt.service.DocumentFileService;
 import com.example.be_job_hunt.service.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,6 +48,12 @@ public class DocumentServiceImpl implements DocumentService {
     @Autowired
     private DocumentFileService documentFileService;
 
+    @Override
+    public Page<DocumentDto> getAllDocuments(Pageable pageable) {
+        Page<DocumentEntity> documentPage = documentRepository.findAll(pageable);
+        return documentPage.map(documentMapper::toDto);
+    }
+    
     @Override
     public List<DocumentDto> getAllDocuments() {
         return documentRepository.findAll()
@@ -81,7 +90,16 @@ public class DocumentServiceImpl implements DocumentService {
         return documentMapper.toDto(savedEntity);
     }
 
-//    @Override
+    @Override
+    public void updateStatus(int documentId,String status) {
+        DocumentEntity documentEntity=documentRepository.findById(Long.valueOf(documentId)).get();
+        documentEntity.setStatus(Status.valueOf(status));
+        documentRepository.save(documentEntity);
+
+    }
+
+
+    //    @Override
 //    public DocumentDto updateDocument(long id, DocumentDto documentDto) throws NotFoundException {
 //        if (!documentRepository.existsById(id)) {
 //            throw new NotFoundException("Document not found with id: " + id);
@@ -123,12 +141,6 @@ public class DocumentServiceImpl implements DocumentService {
 @Override
 public List<DocumentDto> getDocumentsBySubjectId(long subjectId) {
     Optional<SubjectEntity> optionalSubject = subjectRepository.findById((int) subjectId);
-
-    if (optionalSubject.isEmpty()) {
-        System.out.println("Không tìm thấy subject với ID: " + subjectId);
-        return List.of();
-    }
-
     SubjectEntity subject = optionalSubject.get();
     List<DocumentEntity> documents = documentRepository.findBySubjectId(subject.getId());
 
@@ -139,7 +151,10 @@ public List<DocumentDto> getDocumentsBySubjectId(long subjectId) {
 
     List<DocumentDto> documentDtos = new ArrayList<>();
     for (DocumentEntity doc : documents) {
-        documentDtos.add(documentMapper.toDto(doc));
+        if(String.valueOf(doc.getStatus()).equals("approved")){
+            documentDtos.add(documentMapper.toDto(doc));
+
+        }
     }
 
     return documentDtos;

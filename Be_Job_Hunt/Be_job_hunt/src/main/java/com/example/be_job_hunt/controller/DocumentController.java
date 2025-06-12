@@ -5,6 +5,10 @@ import com.example.be_job_hunt.dto.Document.DocumentDto;
 import com.example.be_job_hunt.service.DocumentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +29,23 @@ public class DocumentController {
     private DocumentService documentService;
     
     @GetMapping
-    public ResponseEntity<List<DocumentDto>> getAllDocuments() {
-        return ResponseEntity.ok(documentService.getAllDocuments());
+    public ResponseEntity<Page<DocumentDto>> getPagedDocuments(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "desc") String direction) {
+        
+        Sort.Direction sortDirection = direction.equalsIgnoreCase("asc") 
+            ? Sort.Direction.ASC 
+            : Sort.Direction.DESC;
+        
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, "createdAt"));
+        Page<DocumentDto> documents = documentService.getAllDocuments(pageable);
+        
+        return ResponseEntity.ok(documents);
     }
+
+    
+
     
 //    @GetMapping
 //    public ResponseEntity<DocumentDto> getDocumentBySubject(@PathVariable long id) {
@@ -47,6 +65,14 @@ public class DocumentController {
         DocumentDto documentDto = mapper.readValue(documentJson, DocumentDto.class);
 
         return new ResponseEntity<>(documentService.createDocument(documentDto, files), HttpStatus.CREATED);
+    }
+    @PostMapping("/update-status")
+    public ResponseEntity<String>updateStatus(
+            @RequestParam("status")String status,
+            @RequestParam("documentId") int documentId
+    ){
+        documentService.updateStatus(documentId,status);
+        return ResponseEntity.ok("Update status thành công");
     }
 
 

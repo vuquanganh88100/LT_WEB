@@ -1,5 +1,6 @@
 package com.example.be_job_hunt.dto.Document;
 
+import com.example.be_job_hunt.dto.DepartmentDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,8 +16,10 @@ public class DocumentDto {
     private String type;
     private String description;
     private long subjectId;
+    private String subjectCode;
     private long userId;
     private String folderId;
     private String status;
     private LocalDateTime createdAt;
+    private DepartmentDto departmentDto;
 }

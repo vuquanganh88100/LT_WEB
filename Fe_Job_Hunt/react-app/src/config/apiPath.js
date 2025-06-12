@@ -17,5 +17,8 @@ export const apiPath={
 
     //document
     getDocumentBySubject:API_PATH+"/document/subject",
-    createDocument:API_PATH+"/document"
+    createDocument:API_PATH+"/document",
+    getAllDocuments:API_PATH+"/document",
+    updateDocumentStatus:API_PATH+"/document/update-status",
+    deleteDocument:API_PATH+"/document"
 }

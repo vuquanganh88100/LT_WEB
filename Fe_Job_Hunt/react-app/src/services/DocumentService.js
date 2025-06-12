@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { apiPath } from "../config/apiPath"
-import { getRequest, postRequest } from '../config/apiCaller';
+import { getRequest, postRequest, putRequest, deleteRequest } from '../config/apiCaller';
 
 export const getDocumentsBySubject = async (
     subjectId,
@@ -35,5 +35,62 @@ export const addDocument = async (documentData, files, successCallback, errorCal
         { 
             'Content-Type': 'multipart/form-data'
         }
+    );
+};
+
+// Get all documents with pagination
+export const getAllDocuments = async (
+    page = 0,
+    size = 10,
+    sort = 'createdAt,desc',
+    status = null,
+    search = null,
+    successCallback,
+    errorCallback
+) => {
+    const params = { page, size, sort };
+    
+    if (status) {
+        params.status = status;
+    }
+    
+    if (search) {
+        params.search = search;
+    }
+    
+    await getRequest(
+        apiPath.getAllDocuments,
+        params,
+        successCallback,
+        errorCallback
+    );
+};
+
+// Update document status
+export const updateDocumentStatus = async (
+  documentId,
+  status,
+  successCallback,
+  errorCallback
+) => {
+  const url = `${apiPath.updateDocumentStatus}?documentId=${documentId}&status=${status}`;
+  await postRequest(
+    url,
+    {}, 
+    successCallback,
+    errorCallback
+  );
+};
+
+
+export const deleteDocument = async (
+    documentId,
+    successCallback,
+    errorCallback
+) => {
+    await deleteRequest(
+        `${apiPath.deleteDocument}/${documentId}`,
+        successCallback,
+        errorCallback
     );
 };

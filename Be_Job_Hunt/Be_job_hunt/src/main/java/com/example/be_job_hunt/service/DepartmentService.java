@@ -14,4 +14,5 @@ public interface DepartmentService {
     List<DepartmentDto> getDepartment();
     DepartmentDto saveDepartment(DepartmentDto departmentDto);
     DepartmentDto updateDepartment(int id, DepartmentDto departmentDto) throws DuplicateException;
+
 }
