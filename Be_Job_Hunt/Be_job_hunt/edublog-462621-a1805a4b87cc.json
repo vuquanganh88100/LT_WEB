@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "edublog-462621",
+  "private_key_id": "a1805a4b87cce517619cfbc73fd957a1836d1cfe",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCvZeiQNigGNGen\np5ctWwSxWW5Qrbzm/t6vQNrckuUxo8yOqpbp+FPu8jyIIztcJkeRFRCoUjhmdDt3\noy3ejQxoK+RAQbm8aiwLQFze+Jc15KPqmurmf4OFICBMcsFC0jxkyNsifrKvt9kH\nthepAFv/Ppwc+Su9MfO3r8uKtzfJjpmJiiB2GGYwlRtt/r7vr3WcGZbMq+J9kQAH\nAZJV5vzAXy2Nh1dqU5HnEXd1c4Tm4DkogNAt/maBHh4uYAReY6Y16GwZklHW+9eq\nl3hjIwu9BXU/IBKriQKp/h2GI5rgs/SMpJr1MfVcFfKcj35iCK3XM5fHAZ5dgGEB\nj0HDiYTVAgMBAAECggEAA/I8hcYaJ22VaXG9VoFmPSFAeKM4DVBtrS693dmWO4Qu\nbYVMCO6T4NvlXcDBLKUV1h9NtSPIbhGuZtYuiYPN5Cgcpg90gNc4r3YewMuCB23h\n/DzJDS+QQ3YCFAY+7+RwBGp6d6+3EHoH8YL4zE4cQ8ViWMqIX+TYUWksoK3XnPrF\nT5l5XG6EWMky4c3QBgY+nvGlx7DqEtIjCLt1S7gqyBKMe+ARUWyiAeY9Y9flX282\ndbz277YMyxg3+62UeAz2Ekj75xfv8+eGqjX/L6vV3o82X2ZVI/UO7jVSvYlLaNRP\nGWLsWXc7qG/wXuA6bGHut7EbD6ySZCmO40jWPgCGMQKBgQDgVpQg8tMFRh+PZ72J\nCF/kAx/1H0ATmuDbo6wl9gnuJmmerTFUAVeKjRI5TMBhANlKs9Zujg+qx7fmmHMq\nvqPbbXF9/6ebQxshsihLPoaasKL1Rw6tS9KiNGIMihNEJW8wMnXZDr3jURnW1lwJ\nhY4YRK6MJktaXqCXqX1hTwDqaQKBgQDIJxr8UTQOIls283hdQaHs41LrUc3FCQVp\n8eAjrzak04sImIkydkZZYWtxiRhSdSkQ1zT8M4Knu6d77B2cfN0y/33t082JjRw/\n9KxlBNXQuvGSs0eO0XwPgc5AO7BWXN6Er/I15Xvy2VAsTNMiHOqM9Oe0E10Z8Hj+\n7rs8lm4BjQKBgQDHhjlY1J86IZQQR4QbTId8lAroSFMFHMrAjmGdoaZTWXa22fL1\nc/wYDkAXFlxD6i1Yc3pT+aWVjuvQ++XyLnwtvLkkBy1aueR3o6ySv5mYG2HUJM64\n8qbz/QL3hBZ+lYy+oSKPWr0oYAlLOnvBPDeU/gEARU7foSnTubr5wPpfgQKBgHXb\nySEws+Vqx6l4/rRzVGVIiug0mGVg5YY4PpLkttmiE6mxIIDNcqlpGzqUzvSnNtJK\n11F3B4W7k2j+ZYVjZWGFXuLvqIVJyYvDiMxHZ5xsqJmI5icsJdB/0DK0syZ3szQQ\n4yBnjHA5FOOxLVZWDquH/vRjvpvqpWUAsNKBhi91AoGBAITn9MF4rZS314hy4so3\n32sJ4DHaJ8C2Cc49P75sVEeqIPBSA/aQNRpteRopWqsTExR5qiQRP6Mh0FLsFVZb\nAiH67taeN64jVh1YINK3tsYXnKfhpE4v5J06eExBcJ9pzWe5iLRYDMCscpcfSaxT\ng5ree4/506wWCKpLy7VYZ1Fz\n-----END PRIVATE KEY-----\n",
+  "client_email": "edu-blog-storage@edublog-462621.iam.gserviceaccount.com",
+  "client_id": "115667396923168554200",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/edu-blog-storage%40edublog-462621.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
