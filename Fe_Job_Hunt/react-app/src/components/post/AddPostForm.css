@@ -1,0 +1,81 @@
+.add-post-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-post-container h2 {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.form-helper-text {
+  text-align: center;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.post-form {
+  margin-top: 24px;
+}
+
+/* Custom styling for the Markdown editor */
+.rc-md-editor {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+}
+
+.rc-md-editor:focus-within {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.rc-md-editor .rc-md-navigation {
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.rc-md-editor .editor-container {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Make sure markdown content is left-aligned */
+.rc-md-editor .editor-container .sec-md .input {
+  text-align: left;
+}
+
+/* Ensure the preview content is also left-aligned */
+.rc-md-editor .editor-container .sec-html {
+  text-align: left;
+}
+
+/* Post settings panel */
+.post-settings-panel {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  height: 100%;
+}
+
+.form-guidelines {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+}
+
+.form-guidelines ul {
+  padding-left: 20px;
+  color: #666;
+}
+
+.form-guidelines ul li {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+

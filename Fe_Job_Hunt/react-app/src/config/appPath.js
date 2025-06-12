@@ -25,5 +25,10 @@ export const appPath = {
     subjectsByDepartment: (departmentId) => `/subjects/${departmentId}`,
     
     // documents
-    subjectDocuments: (subjectId) => `/subject/${subjectId}/documents`
+    subjectDocuments: (subjectId) => `/subject/${subjectId}/documents`,
+    
+    // posts
+    posts: "/knowledge",
+    createPost: "/knowledge/create",
+    postDetail: (postId) => `/knowledge/post/${postId}`
 }

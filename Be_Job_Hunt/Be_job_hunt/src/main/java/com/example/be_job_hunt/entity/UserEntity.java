@@ -51,6 +51,9 @@ public class UserEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<DocumentEntity> documentEntities;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<PostEntity> postEntities;
+
     public Long getId() {
         return id;
     }

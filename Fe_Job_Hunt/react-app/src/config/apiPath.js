@@ -1,3 +1,4 @@
+import { getAllDepartment } from "../services/DepartmentService"
 import { getSubjectByDepartment } from "../services/SubjectService"
 
 export const  API_PATH="/blog/api"
@@ -20,5 +21,9 @@ export const apiPath={
     createDocument:API_PATH+"/document",
     getAllDocuments:API_PATH+"/document",
     updateDocumentStatus:API_PATH+"/document/update-status",
-    deleteDocument:API_PATH+"/document"
+    deleteDocument:API_PATH+"/document",
+
+    //post
+    createPost:API_PATH+"/post",
+    getAllPost:API_PATH+"/post"
 }
