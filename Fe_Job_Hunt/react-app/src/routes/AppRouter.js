@@ -13,7 +13,10 @@ import DocumentAdmin from '../pages/Admin/Document/DocumentAdmin';
 import SubjectPage from '../pages/Subject/SubjectPage';
 import DocumentPage from '../pages/Document/Document';
 import PostPage from '../pages/Post/Post';
+import PostDetail from '../pages/Post/PostDetail';
 import { appPath } from '../config/appPath';
+import { PostAdmin } from '../pages/Admin/Post/PostAdmin';
+import PostAdminDetail from '../pages/Admin/Post/PostAdminDetail';
 
 const AppRoutes = () => {
     return (
@@ -35,8 +38,9 @@ const AppRoutes = () => {
             {/* Home Page - Accessible to both guests and logged-in users */}
             <Route path={appPath.home} element={<HomePage />} />
 
-            {/* Knowledge/Blog Page */}
+            {/* Knowledge/Blog Pages */}
             <Route path="/knowledge" element={<PostPage />} />
+            <Route path="/knowledge/post/:postId" element={<PostDetail />} />
 
             {/* Faculty document pages - placeholder routes */}
             <Route path="/documents/:faculty" element={
@@ -66,14 +70,10 @@ const AppRoutes = () => {
                 <Route path="dashboard" element={<DashboardPage />} />
                 <Route path="users" element={<UsersPage />} />
                 <Route path="departments" element={<DepartmentAdmin />} />
-                <Route path="posts" element={<PostPage />} />
+                <Route path="posts" element={<PostAdmin />} />
+                <Route path="posts/:postId" element={<PostAdminDetail />} />
                 <Route path="documents" element={<DocumentAdmin />} />
-                <Route path="settings" element={
-                    <div>
-                        <h2>Cài đặt hệ thống</h2>
-                        <p>Trang cài đặt hệ thống sẽ được phát triển sau.</p>
-                    </div>
-                } />
+               
                 <Route path="subjects" element={<SubjectAdmin />} />
 
             </Route>

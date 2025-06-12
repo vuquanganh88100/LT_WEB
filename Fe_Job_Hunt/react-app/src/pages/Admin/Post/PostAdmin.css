@@ -1,0 +1,253 @@
+/* PostAdmin CSS - Similar to DocumentAdmin */
+.dashboard-container {
+  padding: 24px;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* Statistics Cards */
+.ant-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f0f0f0;
+  transition: box-shadow 0.3s ease;
+}
+
+.ant-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ant-statistic-title {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.ant-statistic-content {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Table Styling */
+.ant-table {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #f0f0f0;
+  padding: 12px 16px;
+}
+
+.ant-table-tbody > tr > td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background: #f8f9ff;
+}
+
+/* Tags */
+.ant-tag {
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  padding: 2px 8px;
+  border: none;
+}
+
+/* Buttons */
+.ant-btn {
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.ant-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ant-btn-sm {
+  height: 28px;
+  padding: 0 8px;
+  font-size: 12px;
+}
+
+/* Input */
+.ant-input {
+  border-radius: 6px;
+  border: 1px solid #d9d9d9;
+  transition: all 0.3s ease;
+}
+
+.ant-input:focus,
+.ant-input-focused {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.ant-space-item {
+  margin-bottom: 0;
+}
+
+/* Post specific styles */
+.post-title-cell {
+  max-width: 300px;
+}
+
+.post-title-cell .post-title {
+  font-weight: 500;
+  margin-bottom: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-title-cell .post-author {
+  font-size: 12px;
+  color: #666;
+}
+
+.post-stats {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.post-stats > div {
+  margin-bottom: 2px;
+}
+
+/* Categories */
+.post-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.post-categories .ant-tag {
+  margin: 0;
+}
+
+/* Modal styles */
+.ant-modal-header {
+  border-radius: 8px 8px 0 0;
+}
+
+.ant-modal-content {
+  border-radius: 8px;
+}
+
+.post-preview-content {
+  max-height: 300px;
+  overflow: auto;
+  padding: 16px;
+  background: #f5f5f5;
+  border-radius: 6px;
+  white-space: pre-wrap;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+/* Status specific colors */
+.status-draft {
+  background: #f5f5f5;
+  color: #8c8c8c;
+}
+
+.status-pending {
+  background: #fff7e6;
+  color: #faad14;
+}
+
+.status-published {
+  background: #f6ffed;
+  color: #52c41a;
+}
+
+.status-rejected {
+  background: #fff2f0;
+  color: #ff4d4f;
+}
+
+/* Action buttons spacing */
+.action-buttons {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.action-buttons .ant-btn {
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .ant-col-4-5 {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 16px;
+  }
+  
+  .ant-table {
+    font-size: 12px;
+  }
+  
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    padding: 8px 12px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .action-buttons .ant-btn {
+    width: 100%;
+    margin-bottom: 4px;
+  }
+}
+
+/* Header with button */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.page-header h2 {
+  margin: 0;
+}
+
+/* Search section */
+.search-section {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Table pagination */
+.ant-pagination {
+  margin-top: 16px;
+  text-align: right;
+}
+
+.ant-pagination .ant-pagination-total-text {
+  color: #666;
+  font-size: 14px;
+}

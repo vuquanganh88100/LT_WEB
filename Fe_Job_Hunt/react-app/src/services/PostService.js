@@ -25,6 +25,20 @@ export const getAllPost = async (
         errorCallback
     );
 };
+export const updatePostStatus = async (
+  postId,
+  status,
+  successCallback,
+  errorCallback
+) => {
+  const url = `${apiPath.updatePostStatus}?postId=${postId}&status=${status}`;
+  await postRequest(
+    url,
+    {}, 
+    successCallback,
+    errorCallback
+  );
+};
 
 
 // Export all functions as a default object

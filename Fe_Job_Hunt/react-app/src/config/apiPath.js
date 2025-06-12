@@ -1,4 +1,5 @@
 import { getAllDepartment } from "../services/DepartmentService"
+import { updatePostStatus } from "../services/PostService"
 import { getSubjectByDepartment } from "../services/SubjectService"
 
 export const  API_PATH="/blog/api"
@@ -25,5 +26,7 @@ export const apiPath={
 
     //post
     createPost:API_PATH+"/post",
-    getAllPost:API_PATH+"/post"
+    getAllPost:API_PATH+"/post",
+    updatePostStatus:API_PATH+"/post/update-status"
+
 }

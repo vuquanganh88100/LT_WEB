@@ -97,9 +97,7 @@ const DashboardLayout = () => {
               </Menu.Item>
             </>
           )}
-          <Menu.Item key="/admin/settings" icon={<SettingOutlined />}>
-            <Link to="/admin/settings">Cài đặt hệ thống</Link>
-          </Menu.Item>
+         
 
           <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout}>
             Đăng xuất

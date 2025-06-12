@@ -1,7 +1,9 @@
 package com.example.be_job_hunt.service.imp;
 
 import com.example.be_job_hunt.dto.PostDto;
+import com.example.be_job_hunt.entity.DocumentEntity;
 import com.example.be_job_hunt.entity.PostEntity;
+import com.example.be_job_hunt.entity.Status;
 import com.example.be_job_hunt.mapper.PostMapper;
 import com.example.be_job_hunt.repository.PostRepository;
 import com.example.be_job_hunt.service.PostService;
@@ -33,5 +35,12 @@ public class PostServiceImpl implements PostService {
         }
         postDtos.sort((a, b) -> b.getCreatedAt().compareTo(a.getCreatedAt()));
         return  postDtos;
+    }
+
+    @Override
+    public void updateStatus(long postId, String status) {
+        PostEntity postEntity=postRepository.findById(Long.valueOf(postId)).get();
+        postEntity.setStatus(Status.valueOf(status));
+        postRepository.save(postEntity);
     }
 }

@@ -27,4 +27,12 @@ public class PostController {
     public ResponseEntity<List<PostDto>> getAll(){
         return  ResponseEntity.ok(postService.getAllPost());
     }
+    @PostMapping("/update-status")
+    public ResponseEntity<String>updateStatus(
+            @RequestParam("status")String status,
+            @RequestParam("postId") int postId
+    ){
+        postService.updateStatus(postId,status);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Update status thành công ");
+    }
 }
